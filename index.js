@@ -78,7 +78,7 @@ class Team{
     console.log("Start"); 
     let createTeamAns = await inquirer.prompt(this.teamCreationQuestion[0]);
     this.teamName = createTeamAns.team_name;
-    await this.memberAddition(); 
+    await this.membersAddition(); 
   };//end of team creation
 
   //async memberAddition
@@ -91,15 +91,35 @@ class Team{
     }
     else{
       console.log(`${this.teamName} has been created`);
-      
+      this.generateHTML()
     }
   };//end of members addition
 
   generateHTML(){
+    let contentHTML = 
+    `<!doctype html>
+      <html lang="en">
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+            <title>Team Creation Application</title>
+            <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        </head>
+        <body>
+           <h1 align="center">${this.teamName}</h1>
+           <div class="container">
+                <div class="row gx-9 gy-5 row-cols-4">`;
+    
+    //Members Details
     for(let i = 0; i < this.members.length; i++){
-      console.log(this.members[i].generateHTML());
+      contentHTML += this.members[i].generateHTML();
     }
-  }
+
+    //end of html. 
+    contentHTML += "</div></div></body></html>";
+    return fs.writeFileSync(this.HTMLFile, contentHTML);
+  }; //generateHTML
+
 }// end of class team
 
 
