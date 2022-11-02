@@ -1,4 +1,5 @@
 const inquirer = require("inquirer");
+const fs = require("fs");
 const Employee = require("./lib/Employee");
 const Manager =  require("./lib/Manager");
 const Intern = require("./lib/Intern");
@@ -8,6 +9,7 @@ class Team{
   constructor(){
     this.teamName = "";
     this.members = [];
+    this.HTMLFile = "./dist/team_details.html";
     this.roles = {"Manager": Manager, "Intern": Intern, "Engineer": Engineer};
     this.rolesQuestion = {"Manager": "Office number", 
                           "Engineer": "Github URL",
@@ -80,20 +82,24 @@ class Team{
   };//end of team creation
 
   //async memberAddition
-  async memberAddition(){
+  async membersAddition(){
     let createTeamAns = await inquirer.prompt(this.teamCreationQuestion[1]);
     if (createTeamAns.continue){
       //console.log(createTeamAns.continue);
       let member =  await this.addAMember();
-      await this.memberAddition();
+      await this.membersAddition();
     }
     else{
       console.log(`${this.teamName} has been created`);
-      for(let i = 0; i < this.members.length; i++){
-        console.log(this.members[i].generateHTML());
-      }
+      
     }
-  };//end of member addition
+  };//end of members addition
+
+  generateHTML(){
+    for(let i = 0; i < this.members.length; i++){
+      console.log(this.members[i].generateHTML());
+    }
+  }
 }// end of class team
 
 
