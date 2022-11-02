@@ -44,7 +44,7 @@ class Team{
       },
       {
         type:"input", 
-        name:"Id",
+        name:"id",
         message:"Enter the Id of the new team member",   
       },
     ];//end of generalQuestion for a member[]
@@ -89,6 +89,9 @@ class Team{
     }
     else{
       console.log(`${this.teamName} has been created`);
+      for(let i = 0; i < this.members.length; i++){
+        console.log(this.members[i].generateHTML());
+      }
     }
   };//end of member addition
 }// end of class team
@@ -96,6 +99,7 @@ class Team{
 
 let team = new Team();
 team.teamCreation();
+
 
 //Ask the user if he wants to create the team. 
 //If yes ask him the team name. 
