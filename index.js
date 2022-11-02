@@ -11,9 +11,9 @@ class Team{
     this.members = [];
     this.HTMLFile = "./dist/team_details.html";
     this.roles = {"Manager": Manager, "Intern": Intern, "Engineer": Engineer};
-    this.rolesQuestion = {"Manager": "Office number", 
-                          "Engineer": "Github URL",
-                          "Intern": "School name",                      
+    this.rolesQuestion = {"Manager": "office_number", 
+                          "Engineer": "github_url",
+                          "Intern": "school_name",                      
                           };
     
     this.teamCreationQuestion = [
@@ -68,6 +68,8 @@ class Team{
       message:`Enter information about the new team member's ${extrafield}`,  
     },])
     member[`${extrafield}`] = answers_extrafield[`${extrafield}`];
+    console.log(member[`${extrafield}`]);
+    //console.log(answers_extrafield[`${extrafield}`]);
     this.members.push(member);
     console.log(`You have added ${this.members.length} members.`);
     return member;
