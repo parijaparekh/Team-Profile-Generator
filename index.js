@@ -145,7 +145,7 @@ class Team{
 let team = new Team();
 team.teamCreation();
 
-
+//Initial program flow. Pseudocode
 //Ask the user if he wants to create the team. 
 //If yes ask him the team name. 
 //In a loop till continue is true
