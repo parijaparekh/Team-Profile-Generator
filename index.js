@@ -55,23 +55,41 @@ class Team{
   //Async Await can also be used
   async addAMember(){
     //console.log(this.generalQuestion);
+    let incorrectInputArr = [];
     const answers = await inquirer.prompt(this.generalQuestion);
     let member = new this.roles[answers.role]();
     let extrafield = this.rolesQuestion[member.role];
     //console.log(extrafield);
-    member.name = answers.name;
-    member.email = answers.email;
-    member.id = answers.id;
-    const answers_extrafield =  await inquirer.prompt([{
-      type:"input",
-      name: `${extrafield}`,
-      message:`Enter information about the new team member's ${extrafield}`,  
-    },])
-    member[`${extrafield}`] = answers_extrafield[`${extrafield}`];
-    console.log(member[`${extrafield}`]);
-    //console.log(answers_extrafield[`${extrafield}`]);
-    this.members.push(member);
-    console.log(`You have added ${this.members.length} members.`);
+    if (!member.setName(answers.name)){
+      incorrectInputArr.push("name");
+    }
+    if (!member.setEmail(answers.email)){
+      incorrectInputArr.push("email");
+    }
+    if (!member.setId(answers.id)){
+      incorrectInputArr.push("Id");  
+    }
+    
+    if (incorrectInputArr.length == 0){
+      const answers_extrafield =  await inquirer.prompt([{
+        type:"input",
+        name: `${extrafield}`,
+        message:`Enter information about the new team member's ${extrafield}`,  
+      },])
+      if (!member.setExtraField(answers_extrafield[`${extrafield}`])){
+        console.log(`The ${extrafield} information is not provided correctly. Hence it wouldn't be recorded.`)
+      }
+      else{
+        member[`${extrafield}`] = answers_extrafield[`${extrafield}`];
+        console.log(member[`${extrafield}`]);
+      }  
+      //console.log(answers_extrafield[`${extrafield}`]);
+      this.members.push(member);
+      console.log(`You have added ${this.members.length} members.`);
+    }
+    else{
+      console.log(`The ${member.role} could not be added as the following information is not provided correctly ${incorrectInputArr}`);
+    }  
     return member;
   };// end of addAMember
 
@@ -121,7 +139,6 @@ class Team{
     contentHTML += "</div></div></body></html>";
     return fs.writeFileSync(this.HTMLFile, contentHTML);
   }; //generateHTML
-
 }// end of class team
 
 
