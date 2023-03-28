@@ -3,20 +3,22 @@ const Employee = require('../lib/Employee');
 describe('Employee class testing', () => {
   describe('Initialization', () => {
     // Positive test
-    it("Should create an Employee object with name, id, email and role property set to the values provided through variables name, id, email and role respectively", () => {
+    it("Should create an Employee object with name, id, email, role and icon property set to the values provided through variables name, id, email and role respectively", () => {
       // Arrange
       const role = "Manager";
       const name = 'Parija Parekh';
       const email = 'parija.parekh@gmail.com';
       const id = 1234;
+      const icon = "bi bi-person"
       // Act
-      const employee = new Employee(name, id, email, role);
+      const employee = new Employee(name, id, email, role, icon);
 
       // Assert
       expect(employee.role).toEqual(role);
       expect(employee.name).toEqual(name);
       expect(employee.email).toEqual(email);
       expect(employee.id).toEqual(id);
+      expect(employee.icon).toEqual(icon);
     });
 
     // usecase wherein only role is provided at the time of employee object creation.
@@ -25,7 +27,7 @@ describe('Employee class testing', () => {
       // Arrange
       const role = "Engineer"; 
       //Act
-      const employee = new Employee("","","",role);
+      const employee = new Employee("","","",role, "");
       //Assert
       expect(employee.role).toEqual(role);
     });
@@ -115,8 +117,9 @@ describe('Employee class testing', () => {
       const name = 'Parija Parekh';
       const email = 'parija.parekh@gmail.com';
       const id = 1234;
+      const icon = "bi bi-person";
       // Act
-      const employee = new Employee(name, id, email, role);
+      const employee = new Employee(name, id, email, role, icon);
       expect(employee.getName()).toEqual(name);
     });//end of it -- getName()
 
@@ -125,8 +128,9 @@ describe('Employee class testing', () => {
       const name = 'Parija Parekh';
       const email = 'parija.parekh@gmail.com';
       const id = 1234;
+      const icon = "bi bi-person";
       // Act
-      const employee = new Employee(name, id, email, role);
+      const employee = new Employee(name, id, email, role, icon);
       expect(employee.getRole()).toEqual(role);
     });//end of it -- getRole()
 
@@ -135,8 +139,9 @@ describe('Employee class testing', () => {
       const name = 'Parija Parekh';
       const email = 'parija.parekh@gmail.com';
       const id = 1234;
+      const icon = "bi bi-person";
       // Act
-      const employee = new Employee(name, id, email, role);
+      const employee = new Employee(name, id, email, role, icon);
       expect(employee.getId()).toEqual(id);
     });//end of it -- getId()
 
@@ -145,8 +150,9 @@ describe('Employee class testing', () => {
       const name = 'Parija Parekh';
       const email = 'parija.parekh@gmail.com';
       const id = 1234;
+      const icon = "bi bi-person";
       // Act
-      const employee = new Employee(name, id, email, role);
+      const employee = new Employee(name, id, email, role, icon);
       expect(employee.getEmail()).toEqual(email);
     });//end of it -- getEmail()
   });//end of describe for getters  
@@ -157,25 +163,26 @@ describe('Employee class testing', () => {
       const name = 'Parija Parekh';
       const email = 'parija.parekh@gmail.com';
       const id = 1234;
+      const icon = "bi bi-person";
       let contentHTML = 
       `<div class="col">
         <div class="card">
           <div class="card-body">
             <h5 class="card-header">
                 <p>${name}<br>${role}
-                <img src="..." class="card-img-top">
+                <span class="${icon}"></span>
                 </p>
             </h5>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">Id: ${id}</li>
-                <li class="list-group-item">Email: ${email}</li>
+                <li class="list-group-item">Email: <a href = "mailto: ${email}">${email}</a></li>
                 <li class="list-group-item"></li>
             </ul>
           </div>
         </div>
       </div>`;
       contentHTML = contentHTML.replace(/(\r\n|\n|\r|\s)/gm, "");
-      const employee = new Employee(name, id, email, role);
+      const employee = new Employee(name, id, email, role, icon);
       expect(employee.generateHTML().replace(/(\r\n|\n|\r|\s)/gm, "")).toBe(contentHTML);
     }); //end of it generateHTML
   });//end of describe generateHTML

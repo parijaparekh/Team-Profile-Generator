@@ -111,7 +111,8 @@ class Team{
     }
     else{
       console.log(`${this.teamName} has been created`);
-      this.generateHTML()
+      this.generateHTML();
+      //fs.openSync(this.HTMLFile);
     }
   };//end of members addition
 
@@ -145,6 +146,7 @@ class Team{
 
 let team = new Team();
 team.teamCreation();
+
 
 //Initial program flow. Pseudocode
 //Ask the user if he wants to create the team. 

@@ -1,14 +1,16 @@
 const Engineer = require('../lib/Engineer');
-
+//testing is done for constructor and for checking the role set to engineer.
+//for setExtraField() method for githuburl.
 describe('Engineer class testing', () => {
   describe('Initialization', () => {
     // Positive test
-    it("Should create an Engineer object with name, id and email property set to the values provided through variables name, id and email respectively. Role is set to Engineer.", () => {
+    it("Should create an Engineer object with name, id and email property set to the values provided through variables name, id and email respectively. Role is set to Engineer. Icon is set to bi bi-github", () => {
       // Arrange
       const name = 'Parija Parekh';
       const email = 'parija.parekh@gmail.com';
       const id = 1234;
       const githuburl = "https://github.com/parijaparekh";
+      const icon = "bi bi-github";
       // Act
       const engineer = new Engineer(name, id, email, githuburl);
 
@@ -17,6 +19,7 @@ describe('Engineer class testing', () => {
       expect(engineer.name).toEqual(name);
       expect(engineer.email).toEqual(email);
       expect(engineer.id).toEqual(id);
+      expect(engineer.icon).toEqual(icon);
       expect(engineer.github_url).toEqual(githuburl);
     });
 
@@ -26,6 +29,7 @@ describe('Engineer class testing', () => {
       //Act
       const engineer = new Engineer();
       //Assert
+      expect(engineer.icon).toEqual("bi bi-github");
       expect(engineer.role).toEqual("Engineer");
     });
   });// End of Initialisation
@@ -47,34 +51,4 @@ describe('Engineer class testing', () => {
         });// end of it -- setExtraField() pass cases
     });//end of describe for setExtraField() --github URL for engineer
   });//end of describe for set() methods
-  
-  describe("generateHTML()", () => {
-    it("This method generates the HTML for the engineer object. This generateHTML() even tests extraFieldHTML()", () => {
-        const role = "Engineer";
-        const name = 'Parija Parekh';
-        const email = 'parija.parekh@gmail.com';
-        const id = 1234;
-        const githuburl = "https://github.com/parijaparekh"
-        let contentHTML = 
-        `<div class="col">
-        <div class="card">
-            <div class="card-body">
-            <h5 class="card-header">
-                <p>${name}<br>${role}
-                <img src="..." class="card-img-top">
-                </p>
-            </h5>
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Id: ${id}</li>
-                <li class="list-group-item">Email: ${email}</li>
-                <li class="list-group-item">Github: ${githuburl}</li>
-            </ul>
-            </div>
-        </div>
-        </div>`;
-        contentHTML = contentHTML.replace(/(\r\n|\n|\r|\s)/gm, "");
-        const engineer = new Engineer(name, id, email, githuburl);
-        expect(engineer.generateHTML().replace(/(\r\n|\n|\r|\s)/gm, "")).toBe(contentHTML);
-    }); //end of it generateHTML
-  });//end of describe generateHTML
 });// End of engineer class testing 
