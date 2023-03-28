@@ -38,6 +38,7 @@ describe('Employee class testing', () => {
       const employee = new Employee();
       //Assert
       expect(employee.role).toEqual("Employee");
+      expect(employee.icon).toEqual("bi bi-person");
     });
   });// End of Initialisation
 
