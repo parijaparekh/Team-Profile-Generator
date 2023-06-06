@@ -10,6 +10,12 @@ This is a Node.js command-line application that takes in information about emplo
 The application helps managers to enter information about their team members and generates an HTML page based on the information provided. 
 ```
 
+## Deliverables
+
+### Sample Html page
+
+[a relative link](./dist/team_details.html)
+
 ### Walkthrough Video:
 
 ```
