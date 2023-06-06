@@ -14,7 +14,7 @@ The application helps managers to enter information about their team members and
 
 ### Sample Html page
 
-[a relative link: Sample HTML page](./dist/team_details.html)
+[Sample HTML page](http://./dist/team_details.html)
 
 ### Walkthrough Video:
 
